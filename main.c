@@ -40,6 +40,7 @@ int main(int argc, const char * argv[]) {
             case MAC:
                 break;
             case BRANCH:
+                branch(instr,registers,&pc);
                 break;
             case RES1:
                 break;
@@ -58,6 +59,7 @@ int main(int argc, const char * argv[]) {
             case HALT:
                 break;
         }
+        inst_count++;
         pc++;
         word = decode(memory[pc],instr);
     }
