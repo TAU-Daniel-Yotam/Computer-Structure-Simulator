@@ -12,8 +12,8 @@ int main(int argc, const char * argv[]) {
     FILE*memin = fopen(argv[1], "r");
     FILE*memout = fopen(argv[2], "w");
     FILE*regout = fopen(argv[3], "w");
-    FILE*trace = fopen(argv[3], "w");
-    FILE*count = fopen(argv[3], "w");
+    FILE*trace = fopen(argv[4], "w");
+    FILE*count = fopen(argv[5], "w");
     int memory[MEMSIZE]={0};
     int registers[NUMREGS] = {0};
     int inst_count=0;
