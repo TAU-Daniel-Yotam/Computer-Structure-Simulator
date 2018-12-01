@@ -25,6 +25,10 @@ int decode(int word, int*inst){
         inst[i] = temp;
         word >>= 4;
     }
+    if(!(inst[0] == 4 || inst[0] == 5 || inst[0] == 7 || inst[0] == 11)){ //sign extension if needed
+        inst[5] <<= 20;
+        inst[5] >>= 20;
+    }
     return word;
 }
 
