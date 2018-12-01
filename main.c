@@ -23,6 +23,7 @@ int main(int argc, const char * argv[]) {
     int word = decode(memory[pc],instr);
     while(instr[0]!=HALT){
         write_trace(trace, word, pc, registers);
+        pc++;
         switch(instr[0]){
             case ADD:
                 add(instr,registers);
@@ -60,7 +61,6 @@ int main(int argc, const char * argv[]) {
                 break;
         }
         inst_count++;
-        pc++;
         word = decode(memory[pc],instr);
     }
     for(int i=0;i<MEMSIZE;i++){ // write memory contents to "memout"
