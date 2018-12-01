@@ -1,9 +1,3 @@
-//
-//  Aux.c
-//  
-//
-//  Created by Yotam Manne on 01/12/2018.
-//
 
 #include "Aux.h"
 #define BUFSIZE 9 // 8 hex digits + '\0'

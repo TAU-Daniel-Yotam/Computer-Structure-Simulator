@@ -1,9 +1,3 @@
-//
-//  Aux.h
-//  
-//
-//  Created by Yotam Manne on 01/12/2018.
-//
 
 #ifndef Aux_h
 #define Aux_h
