@@ -4,6 +4,7 @@
 #include <string.h>
 #include "Enum.h"
 #include "Aux.h"
+#include "Execute.h"
 
 #define MEMSIZE 4096
 #define NUMREGS 16
@@ -29,16 +30,21 @@ int main(int argc, const char * argv[]) {
                 add(instr,registers);
                 break;
             case SUB:
+                sub(instr,registers);
                 break;
             case AND:
+                And(instr,registers)
                 break;
             case OR:
-                break;
+                Or(instr,registers);
             case SLL:
-                break;
+                sll(instr,registers);
+                break
             case SRA:
+                sra(instr,registers);
                 break;
             case MAC:
+                mac(instr,registers);
                 break;
             case BRANCH:
                 branch(instr,registers,&pc);
@@ -50,14 +56,16 @@ int main(int argc, const char * argv[]) {
             case RES3:
                 break;
             case JAL:
+                jal(instr,registers,&pc);
                 break;
             case LW:
+                lw(instr,memory,registers);
                 break;
             case SW:
+                sw(instr,memory,registers);
                 break;
             case JR:
-                break;
-            case HALT:
+                jr(instr,registers,&pc);
                 break;
         }
         inst_count++;
@@ -70,5 +78,12 @@ int main(int argc, const char * argv[]) {
         fprintf(regout, "%08X\n",registers[i]);
     }
     fprintf(count, "%d",inst_count); // write instruction counter to "count"
+    fclose(memin);
+    fclose(memout);
+    fclose(regout);
+    fclose(trace);
+    fclose(count);
     return 0;
 }
+
+
