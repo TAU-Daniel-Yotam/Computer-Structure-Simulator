@@ -8,7 +8,8 @@ void read_memory_file(FILE*memin,int*memory){
     int i = 0;
     char line[BUFSIZ];
     while(!read_line_by_line(memin, line)){
-        memory[i] = (int)strtol(line,NULL,16);
+        int a = (int)strtol(line,NULL,16);
+        memory[i] = a;
         i++;
     }
 }
@@ -36,6 +37,7 @@ int read_line_by_line(FILE*f,char*line){
     char* readlen;
     int bufsize = BUFSIZE;
     if ((readlen = fgets(line, bufsize, f)) != NULL) {
+        fseek(f, 2, SEEK_CUR);
         return 0;
     }
     return 1;

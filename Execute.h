@@ -2,9 +2,10 @@
 #ifndef Execute_h
 #define Execute_h
 #include <stdio.h>
-#define ONE 0xfff;
+#define ONE 0xfff
+//#define DEBUG
 
-#endif /* Execute_h */
+
 void add(int * instr,int * registers);
 void sub(int * instr,int * registers);
 void And(int * instr,int *registers);
@@ -17,3 +18,5 @@ void jal(int * instr,int * registers,int * pc);
 void lw(int * instr,int * mem,int * registers);
 void sw(int * instr,int * mem,int * registers);
 void jr(int * instr,int * registers, int * pc);
+
+#endif /* Execute_h */

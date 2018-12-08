@@ -6,6 +6,8 @@
 #include "Aux.h"
 #include "Execute.h"
 
+// to watch debug printing define DEBUG in "Execute.h"
+
 #define MEMSIZE 4096
 #define NUMREGS 16
 
@@ -15,17 +17,20 @@ int main(int argc, const char * argv[]) {
     FILE*regout = fopen(argv[3], "w");
     FILE*trace = fopen(argv[4], "w");
     FILE*count = fopen(argv[5], "w");
-    int memory[MEMSIZE]={0};
-    int registers[NUMREGS] = {0};
+    int memory[MEMSIZE]={0}; //init memory
+    int registers[NUMREGS] = {0}; //init registers
     int inst_count=0;
-    read_memory_file(memin,memory);
+    read_memory_file(memin,memory); //load memin to memory
     int pc = 0;
     int instr[6]={0};
-    int word = decode(memory[pc],instr);
+    int word = decode(memory[pc],instr); //decode next instruction
     while(instr[0]!=HALT){
+#ifdef DEBUG
+        printf("%08X\n",memory[pc]);
+#endif
         write_trace(trace, word, pc, registers);
         pc++;
-        switch(instr[0]){
+        switch(instr[0]){ //execute instruction
             case ADD:
                 add(instr,registers);
                 break;
@@ -33,13 +38,13 @@ int main(int argc, const char * argv[]) {
                 sub(instr,registers);
                 break;
             case AND:
-                And(instr,registers)
+                And(instr,registers);
                 break;
             case OR:
                 Or(instr,registers);
             case SLL:
                 sll(instr,registers);
-                break
+                break;
             case SRA:
                 sra(instr,registers);
                 break;
@@ -71,6 +76,7 @@ int main(int argc, const char * argv[]) {
         inst_count++;
         word = decode(memory[pc],instr);
     }
+    inst_count++; //increment after halt instruction
     for(int i=0;i<MEMSIZE;i++){ // write memory contents to "memout"
         fprintf(memout, "%08X\n",memory[i]);
     }
