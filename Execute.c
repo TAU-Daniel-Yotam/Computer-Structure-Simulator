@@ -5,6 +5,7 @@
 void add(int * instr,int * registers) {
     #ifdef DEBUG
     printf("add $%d $%d $%d $%d %d\n",instr[1],instr[2],instr[3],instr[4],instr[5]);
+    printf("$%d<- %d + %d + %d\n",instr[1], registers[instr[2]], registers[instr[3]], instr[5]);
     #endif
     registers[instr[1]] = registers[instr[2]] + registers[instr[3]] + instr[5];
 }
@@ -13,6 +14,7 @@ void add(int * instr,int * registers) {
 void sub(int * instr,int * registers){
     #ifdef DEBUG
     printf("sub $%d $%d $%d $%d %d\n",instr[1],instr[2],instr[3],instr[4],instr[5]);
+    printf("$%d<- %d - %d - %d\n",instr[1], registers[instr[2]], registers[instr[3]], instr[5]);
     #endif
     registers[instr[1]] = registers[instr[2]] - registers[instr[3]] - instr[5];
 }
@@ -53,6 +55,7 @@ void sra(int * instr,int * registers){
 void mac(int * instr,int *registers){
     #ifdef DEBUG
     printf("mac $%d $%d $%d $%d %d\n",instr[1],instr[2],instr[3],instr[4],instr[5]);
+    printf("$%d<- %d * %d + %d + %d\n",instr[1], registers[instr[2]], registers[instr[3]], registers[instr[4]], instr[5]);
     #endif
     registers[instr[1]] = registers[instr[2]] * registers[instr[3]] + registers[instr[4]] + instr[5];
 }
