@@ -1,4 +1,7 @@
-
+/**
+ This module contains all the function that our CPU can execute.
+ All functions were implemented according to the pdf file.
+ */
 #ifndef Execute_h
 #define Execute_h
 #include <stdio.h>

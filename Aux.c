@@ -4,6 +4,13 @@
 
 int read_line_by_line(FILE*f,char*line);
 
+
+/**
+ Reads all lines from the memory file and store it's values in an array
+
+ @param memin - the file to read (input memory)
+ @param memory - the array to fill with parsed integer values
+ */
 void read_memory_file(FILE*memin,int*memory){
     int i = 0;
     char line[BUFSIZ];
@@ -14,6 +21,15 @@ void read_memory_file(FILE*memin,int*memory){
     }
 }
 
+
+/**
+ Breaks a given int into 6 integer instruction arguments according to the format in the pdf.
+ The function uses AND masks and shifts to extract the wanted bits for each argument.
+
+ @param word - an integer (a word in the memory)
+ @param inst - an array of size 6 that holds the inst. arguments
+ @return word
+ */
 int decode(int word, int*inst){
     int temp = 0;
     int mask = 0x00000fff;
@@ -33,17 +49,34 @@ int decode(int word, int*inst){
     return word;
 }
 
+
+/**
+ Reads one line from the given file into a given buffer
+ 
+ @param f - a file descriptor
+ @param line - a buffer to read one line to
+ @return 0 if one line was read or 1 if nothing was read (due to error or EOF)
+ */
 int read_line_by_line(FILE*f,char*line){
     char* readlen;
     int bufsize = BUFSIZE;
     if ((readlen = fgets(line, bufsize, f)) != NULL) {
-        fseek(f, 2, SEEK_CUR);
+        fseek(f, 2, SEEK_CUR); // skip \r\n
         return 0;
     }
     return 1;
     
 }
 
+
+/**
+ Write the trace line before each instruction is executed
+
+ @param trace - file descriptor
+ @param inst - the original integer instruction
+ @param pc - program counter
+ @param regs - an array that represents all registers values
+ */
 void write_trace(FILE*trace, int inst, int pc, int*regs){
     fprintf(trace,
             "%08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X\r\n",

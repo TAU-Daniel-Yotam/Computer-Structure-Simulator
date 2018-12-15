@@ -1,4 +1,6 @@
-
+/**
+ This module contains auxiliary functions to help with the program simulation
+ */
 #ifndef Aux_h
 #define Aux_h
 
